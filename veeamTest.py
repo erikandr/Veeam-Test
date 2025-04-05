@@ -62,8 +62,8 @@ def syncDir(src, dest, period):
 
         # Check for removed files and remove them
         for file in list(file_mtime.keys()):
+            dest_file = os.path.join(dest, os.path.relpath(file, src)) # Gets a path to the file in the destination directory
             if not os.path.exists(file):
-                dest_file = os.path.join(dest, os.path.relpath(file, src)) # Gets a path to the file in the destination directory
                 if os.path.exists(dest_file):
                     os.remove(dest_file)              #Removes the file and logs it
                     logging.warning(f'Removed file: {dest_file}')
